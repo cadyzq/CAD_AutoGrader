@@ -14,8 +14,8 @@ This is an autograder for CAD drawings based on image processing.
 ## Project Structure 
 - Main: `main.cpp`  
 - Header files for constants:
-    - color.h: lower and upper bound of colors in HSV for color detection
-    - fields.h: all other constants
+    - `color.h`: lower and upper bound of colors in HSV for color detection
+    - `fields.h`: all other constants
 - There are four modules, each with a cpp file and its corresponding header file:
     - COMPARE: crop, resize, get percentage difference of two images
     - HATCHING: detect hatcing lines and hatched areas of an image
