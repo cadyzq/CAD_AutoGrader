@@ -29,6 +29,8 @@ Since some functions I wrote have the same name as OpenCV built-in functions, it
 ## Known Bugs / Unfinished Work
 See Issues
 
+- I just got started on color detection. More colors need to be added to `color.h`. `feature_extraction.cpp->detectColor()` is the function that performs color separation.   
+
 
 
 
