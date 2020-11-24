@@ -1,0 +1,2 @@
+﻿  CAD_Grader.cpp
+C:\Users\Candy\Documents\CADGrader\CAD_Grader\CAD_Grader\CAD_Grader.cpp(1,9): fatal error C1083: Cannot open include file: 'opencv2/opencv.hpp': No such file or directory

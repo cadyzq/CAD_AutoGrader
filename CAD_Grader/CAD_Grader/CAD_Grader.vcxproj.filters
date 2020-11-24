@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\tools">
+      <UniqueIdentifier>{fc8b50e4-331c-40bf-b577-3b962fbd0c78}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\resources\pictures\2_Flange.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\resources\pictures\2_Flange_2_cat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\resources\pictures\2_Flange_cat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\resources\pictures\3_Flange.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\resources\pictures\4_Flange_2_cat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\resources\pictures\5_SlideBlock.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\resources\pictures\5_SlideBlock_cat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\resources\pictures\5_TeeSlide.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\resources\pictures\5_TeeSlide_cat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\color.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="w1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="w2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thin.cpp">
+      <Filter>Source Files\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="hatching.cpp">
+      <Filter>Source Files\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="zhangsuen.cpp">
+      <Filter>Source Files\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="compare.cpp">
+      <Filter>Source Files\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="feature_extraction.cpp">
+      <Filter>Source Files\tools</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="compare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="thin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hatching.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zhangsuen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fields.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="feature_extraction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
