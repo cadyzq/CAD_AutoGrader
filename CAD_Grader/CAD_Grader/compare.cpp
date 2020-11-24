@@ -1,6 +1,12 @@
 #include "compare.h"
 
 namespace compare {
+
+	/*
+		Find the smallest bounding rectangle of thin, cut both img and thin to that size 
+		@param img  The original image
+		@param thih The thinned image
+	*/
 	void crop(cv::Mat& img, cv::Mat& thin)
 	{
 		cv::Mat inv = cv::Scalar::all(255) - thin;
@@ -19,10 +25,14 @@ namespace compare {
 			boundRect[i] = cv::boundingRect(contours_poly[i]);
 		}
 
-		thin = cv::Mat(thin, boundRect[0]);
-		img = cv::Mat(img, boundRect[0]);
+		thin = cv::Mat(thin, boundRect[boundRect.size() - 1]);
+		img = cv::Mat(img, boundRect[boundRect.size() - 1]);
 	}
 
+	/*
+		resize img1 to the size of img2
+		@return false if img1 cannot be resized to img2's size, true otherwise
+	*/
 	bool resize(cv::Mat& img1, cv::Mat& img2) {
 
 		double prop1 = (double) img1.rows / img1.cols;
@@ -43,10 +53,13 @@ namespace compare {
 		zs::thin(img1, false, false, false);
 		return true;
 	}
-
+	
+	/*
+		Check the number of black pixels in two images 
+	*/
 	double get_percentage_diff(const cv::Mat& img1, const cv::Mat& img2, bool make_graph, std::string name, bool is_contour) {
 		if (img1.size() != img2.size()) {
-			printf("Warning: Image dimension don't agree when comparing hatched area. Quit...");
+			printf("Warning: Image dimension don't agree when comparing hatched area. Quit...\n");
 			return -1;
 		}
 

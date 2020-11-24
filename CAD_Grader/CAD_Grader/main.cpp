@@ -11,37 +11,41 @@
 #include "fields.h"
 
 
-void do_hatching(const cv::Mat& src, const cv::Mat& thin, cv::Mat& hatched, cv::Mat& contour, bool do_graph, std::string name) {
+void find_hatching(const cv::Mat& src, const cv::Mat& thin, cv::Mat& hatched, cv::Mat& contour, bool do_graph, std::string name) {
     cv::Mat hatching_lines_mat;
-    std::queue<cv::Point>* mid_points = new std::queue<cv::Point>();
     thin.copyTo(hatching_lines_mat);
+    std::queue<cv::Point>* mid_points = new std::queue<cv::Point>();
+    // find all hatching lines, store mid-points of those lines in mid_points
     hatching::find_hatching_lines(hatching_lines_mat, mid_points, do_graph);
 
-     //hatched_area is white on a black background
+    // hatched_area is white on a black background
     cv::Mat hatched_area = hatching::detect_hatched_area(thin, mid_points);
     hatching::remove_hatching_lines(hatched_area, false);
     delete mid_points;
 
+    // flip back. Now black hatching area on white background. 
     hatched = cv::Scalar::all(255) - hatched_area;
+    // get contour (get rid of hatched area)
     cv::bitwise_or(thin, hatched_area, contour);
 
     if (do_graph) {
-         //image display
+         //image display, only if needed 
         cv::imshow(name + ", Original", src);
-        cv::imshow(name + ", Hatching Lines", hatching_lines_mat);
-        cv::imshow(name + ", Thin", thin);
-        //cv::imshow(name + ", Binary", bin);
+        //cv::imshow(name + ", Hatching Lines", hatching_lines_mat);
+        //cv::imshow(name + ", Thin", thin);
         cv::imshow(name + ", Hatched Area", hatched);
-        cv::imshow(name + ", Contour", contour);
+        //cv::imshow(name + ", Contour", contour);
     }
 }
 
 void pre_process(cv::Mat& img, cv::Mat& thin, std::vector<std::vector<cv::Point>>& contours) {
     printf("Processing Image...\n");
+    // Turn img into a binary image
     cvtColor(img, thin, cv::COLOR_BGR2GRAY);
     threshold(thin, thin, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
+    
+    // Thin and crop to the smallest bounding box
     zs::thin(thin, false, false, false);
-
     compare::crop(img, thin);
 }
 
@@ -53,6 +57,7 @@ std::string find_name(const char* file_dir) {
 
 int main(int argc, char** argv)
 {
+    // Variables Definition
     cv::Mat src1, thin1, hatched1, contour1, dilated_contour1, outer1;
     cv::Mat src2, thin2, hatched2, contour2, dilated_contour2, outer2;
     std::vector<std::vector<cv::Point>> c1, c2;
@@ -67,15 +72,18 @@ int main(int argc, char** argv)
     const char* input_file_7 = "C:\\Users\\Candy\\Documents\\CADGrader\\resources\\pictures\\5_TeeSlide_cat.png";
     const char* color = "C:\\Users\\Candy\\Documents\\CADGrader\\resources\\pictures\\color.png";
 
-    const char* filename1 = input_file_6;
-    const char* filename2 = input_file_7;
+    const char* filename1 = input_file_0;
+    const char* filename2 = input_file_1;
 
+    // Image Input
     src1 = cv::imread(cv::samples::findFile(filename1), cv::IMREAD_COLOR);
     src2 = cv::imread(cv::samples::findFile(filename2), cv::IMREAD_COLOR);
 
+    // Thin and Cut 
     pre_process(src1, thin1, c1);
     pre_process(src2, thin2, c2);
 
+    // Cut thin1 to the size of thin2
     bool dimension_is_same = false;
     dimension_is_same = compare::resize(thin1, thin2);
 
@@ -84,8 +92,8 @@ int main(int argc, char** argv)
 
         printf("Two images have the same dimension!\n");
         printf("Comparing hatching area...\n");
-        do_hatching(src1, thin1, hatched1, contour1, true, find_name(filename1));
-        do_hatching(src2, thin2, hatched2, contour2, true, find_name(filename2));
+        find_hatching(src1, thin1, hatched1, contour1, true, find_name(filename1));
+        find_hatching(src2, thin2, hatched2, contour2, true, find_name(filename2));
         double hatched_diff = compare::get_percentage_diff(hatched1, hatched2, true, "Hatched Area", false);
         printf("Hatched Area Percentage Difference: %f", hatched_diff);
         if (hatched_diff > kHatchedThreshold) {
@@ -96,7 +104,9 @@ int main(int argc, char** argv)
             printf(", SAME\n");
         }
 
+        // check outer contour 
         if (continue_run) {
+            // dilate contour so that we can set the threshold for same/different contour 
             contour1.copyTo(dilated_contour1);
             contour2.copyTo(dilated_contour2);
             hatching::dilate_image(dilated_contour1);
@@ -115,8 +125,9 @@ int main(int argc, char** argv)
     }
 
 
+    // Check outer contour 
     if (!dimension_is_same) {
-        printf("Outer contour check skipped.\n");
+        printf("Outer contour check skipped since dimension doesn't agree.\n");
     } else {
         outer1 = cv::Mat(src1.size(), CV_8UC1, cv::Scalar(kWhiteColor));
         outer2 = cv::Mat(src2.size(), CV_8UC1, cv::Scalar(kWhiteColor));
@@ -131,12 +142,11 @@ int main(int argc, char** argv)
     }
 
 
-    
+    // Display circles in the picture 
     features::hough_circle(src1, src1, find_name(filename1));
     features::hough_circle(src2, src2, find_name(filename2));
-    imshow("Circle1", src1);
-    imshow("Circle2", src2);
-
+    imshow("Circles, " + find_name(filename1), src1);
+    imshow("Circles, " + find_name(filename2), src2);
 
     cv::waitKey(0);
     return 0;
