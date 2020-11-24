@@ -40,6 +40,7 @@ namespace features {
 	}
 
 	void detectColor(const cv::Mat& img, cv::Mat& out) {
-
+		cv::cvtColor(img, out, cv::COLOR_BGR2HSV);
+		cv::inRange(out, RED_LOWER, RED_HIGHER, out);
 	}
 }
