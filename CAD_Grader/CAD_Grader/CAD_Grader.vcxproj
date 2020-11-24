@@ -146,9 +146,6 @@
     <ClCompile Include="feature_extraction.cpp" />
     <ClCompile Include="hatching.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="thin.cpp" />
-    <ClCompile Include="w1.cpp" />
-    <ClCompile Include="w2.cpp" />
     <ClCompile Include="zhangsuen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +166,6 @@
     <ClInclude Include="feature_extraction.h" />
     <ClInclude Include="fields.h" />
     <ClInclude Include="hatching.h" />
-    <ClInclude Include="thin.h" />
     <ClInclude Include="zhangsuen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

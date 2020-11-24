@@ -1,2 +1,2 @@
 ﻿  main.cpp
-  CAD_Grader.vcxproj -> C:\Users\Candy\Documents\CADGrader\CAD_Grader\x64\Debug\CAD_Grader.exe
+C:\Users\Candy\Documents\CADGrader\CAD_Grader\CAD_Grader\main.cpp(79,5): error C2146: syntax error: missing ';' before identifier 'src1'
